@@ -13,21 +13,33 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
   name: 'List',
+
   data() {
     return {
-      machines: [
-        {
-          id: 1,
-          name: 'Smol Truck',
-        },
-        {
-          id: 2,
-          name: 'Big Truck',
-        },
-      ],
+      machines: [],
     }
+  },
+
+  apollo: {
+    machines: gql`
+      query {
+        machines {
+          id
+          name
+          sensors {
+            name
+          }
+          lastKnownPosition {
+            lat
+            lng
+          }
+        }
+      }
+    `,
   },
 }
 </script>
