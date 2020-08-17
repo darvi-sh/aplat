@@ -12,3 +12,5 @@
 
 - Turns out I was missing to match `($which: MachineWhereUniqInput!)`
 - It was mentioned in the Apollo's error
+
+1 hour of Machine and Sensors pages, querying and updating the server

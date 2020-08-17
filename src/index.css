@@ -1,6 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  font-size: 1.2em;
+}
+
+header,
+footer {
+  left: 0;
+  right: 0;
+  padding: 20px;
+}
+
+header {
+  background-color: white;
+  box-shadow: 0 0 5px silver;
+  top: 0;
+}
+
+footer {
+  position: fixed;
+  background-color: gainsboro;
+  bottom: 0;
+}
+
+main {
+  background-color: whitesmoke;
+  padding: 20px;
 }
