@@ -1,28 +1,15 @@
-import { createApp, h } from 'vue'
-import routes from './routes'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-import NotFound from './pages/404.vue'
+import router from './router'
 
-const SimpleRouterApp = {
-  data: () => ({
-    currentRoute: window.location.pathname,
-  }),
+import App from './App.vue'
 
-  computed: {
-    ViewComponent() {
-      return routes[this.currentRoute] || NotFound
-    },
-  },
+Vue.config.productionTip = false
 
-  render() {
-    return h(this.ViewComponent)
-  },
+Vue.use(VueRouter)
 
-  created() {
-    window.addEventListener('popstate', () => {
-      this.currentRoute = window.location.pathname
-    })
-  },
-}
-
-createApp(SimpleRouterApp).mount('#app')
+new Vue({
+  router,
+  render: (h) => h(App),
+}).$mount('#app')

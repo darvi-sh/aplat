@@ -1,21 +1,17 @@
 <template>
-  <layout>
-    <article>
-      <h1>Machine #</h1>
+  <article>
+    <h1>Machine #{{ $route.params.id }}</h1>
 
-      <Sensors sensors="sensors" />
-    </article>
-  </layout>
+    <Sensors :sensors="[]" />
+  </article>
 </template>
 
 <script>
-import Layout from './../Layout.vue'
 import Sensors from './../components/Sensors.vue'
 
 export default {
   name: 'Machine',
   components: {
-    Layout,
     Sensors,
   },
   data() {

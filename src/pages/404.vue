@@ -1,18 +1,11 @@
 <template>
-  <layout>
-    <article>
-      <p>Page not found.</p>
-    </article>
-  </layout>
+  <article>
+    <p>Page not found.</p>
+  </article>
 </template>
 
 <script>
-import Layout from './../Layout.vue'
-
 export default {
-  name: 'List',
-  components: {
-    Layout,
-  },
+  name: 'NotFound404',
 }
 </script>

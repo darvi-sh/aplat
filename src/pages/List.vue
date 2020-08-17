@@ -1,29 +1,20 @@
 <template>
-  <layout>
-    <article>
-      <h1>Machines</h1>
+  <article>
+    <h1>Machines</h1>
 
-      <ul>
-        <li v-for="machine in machines" :key="machine.name">
-          <v-link :href="`/machine?id=${machine.id}`">
-            {{ machine.name }}
-          </v-link>
-        </li>
-      </ul>
-    </article>
-  </layout>
+    <ul>
+      <li v-for="machine in machines" :key="machine.name">
+        <router-link :to="`/machine/${machine.id}`">
+          {{ machine.name }}
+        </router-link>
+      </li>
+    </ul>
+  </article>
 </template>
 
 <script>
-import Layout from './../Layout.vue'
-import VLink from './../components/VLink.vue'
-
 export default {
   name: 'List',
-  components: {
-    Layout,
-    VLink,
-  },
   data() {
     return {
       machines: [
