@@ -51,7 +51,11 @@ export default {
   },
 
   methods: {
-    updateTemperatureChartData(temperature_data) {
+    morphDataForChart(sensor_data) {
+      if (!sensor_data) {
+        return null
+      }
+
       const data = {
         labels: [],
         datasets: [
@@ -63,41 +67,21 @@ export default {
         ]
       }
 
-      temperature_data.map(sensor_datum => {
+      sensor_data.map(sensor_datum => {
         data.labels.push(
           new Date(sensor_datum.timestamp * 1000).toLocaleDateString()
         )
         data.datasets[0]['data'].push(sensor_datum.value)
       })
 
-      this.temperature_dataset = data
+      return data
     },
-
-    updateNoiseChartData(temperature_data) {
-      const data = {
-        labels: [],
-        datasets: [
-          {
-            label: 'Temperature',
-            borderColor: '#C63',
-            data: []
-          }
-        ]
-      }
-
-      temperature_data.map(sensor_datum => {
-        data.labels.push(
-          new Date(sensor_datum.timestamp * 1000).toLocaleDateString()
-        )
-        data.datasets[0]['data'].push(sensor_datum.value)
-      })
-
-      this.noise_dataset = data
-    }
+    
   },
   created() {
-    // this is not the best solution, but there should be
-    // manual data grabbing even with the perfect data structure
+    // technically we can make everything dynamic and
+    // automatically generate sensor data
+    // here everything is done manually
     this.temperature = this.sensors.find(
       sensor => sensor.name === 'Truck Engine Temperature'
     )
@@ -108,36 +92,41 @@ export default {
   },
 
   apollo: {
+    // changing this key would result in gql complaining, not sure why
     temperature_sensor_data: {
       query: gql`
         query GetSensorData(
-          $name1: String!
-          $name2: String!
+          $temperature_sensor_name: String!
+          $noise_sensor_name: String!
           $from: DateTime!
           $to: DateTime!
         ) {
-          sensor_data_temperature: sensor_data(
-            name: $name1
+          temperature_sensor_data: sensor_data(
+            name: $temperature_sensor_name
             from: $from
             to: $to
           ) {
             timestamp
             value
           }
-          sensor_data_noise: sensor_data(name: $name2, from: $from, to: $to) {
+          noise_sensor_data: sensor_data(
+            name: $noise_sensor_name,
+            from: $from,
+            to: $to
+          ) {
             timestamp
             value
           }
         }
       `,
       result({ data }) {
-        this.updateTemperatureChartData(data.sensor_data_temperature)
-        this.updateNoiseChartData(data.sensor_data_noise)
+        this.temperature_dataset = this.morphDataForChart(data.temperature_sensor_data)
+        this.noise_dataset = this.morphDataForChart(data.noise_sensor_data)
       },
       variables() {
         return {
-          name1: this.sensors[0].name,
-          name2: this.sensors[1].name,
+          temperature_sensor_name: this.sensors[0].name,
+          noise_sensor_name: this.sensors[1].name,
           from: 1355314100,
           to: 1355314300
         }
