@@ -16,3 +16,5 @@
 1 hour of Machine and Sensors pages, querying and updating the server
 
 1.5 of populating chartjs with multi-querying server
+
+Total about 11 hours
