@@ -5,12 +5,13 @@
     <div class="chart-area">
       <h3>The Temperature</h3>
       <line-chart
-        v-if="temperature_dataset"
+        v-if="temperature_dataset && temperature_dataset.labels.length"
         :chart-data="temperature_dataset"
         :options="{
           fill: false
         }"
       />
+      <div v-else>No data</div>
     </div>
 
     <hr />
@@ -18,12 +19,13 @@
     <div class="chart-area">
       <h3>The Noise</h3>
       <line-chart
-        v-if="noise_dataset"
+        v-if="noise_dataset && noise_dataset.labels.length"
         :chart-data="noise_dataset"
         :options="{
           fill: false
         }"
       />
+      <div v-else>No data</div>
     </div>
   </div>
 </template>
