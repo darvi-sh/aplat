@@ -3,15 +3,12 @@ import VueRouter from 'vue-router'
 
 import router from './router'
 
-import Chartist from 'vue-chartist'
-
 import App from './App.vue'
 import { createProvider } from './vue-apollo'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.use(Chartist)
 
 new Vue({
   router,

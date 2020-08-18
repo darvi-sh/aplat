@@ -2,7 +2,7 @@
   <article>
     <h1>Machine #{{ $route.params.id }}</h1>
 
-    <Sensors :sensors="machine.sensors" />
+    <Sensors v-if="machine.sensors.length" :sensors="machine.sensors" />
   </article>
 </template>
 
