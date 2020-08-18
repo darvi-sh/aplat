@@ -14,3 +14,5 @@
 - It was mentioned in the Apollo's error
 
 1 hour of Machine and Sensors pages, querying and updating the server
+
+1.5 of populating chartjs with multi-querying server

@@ -1,6 +1,6 @@
 <template>
   <article>
-    <h1>Machine #{{ $route.params.id }}</h1>
+    <h1>Machine #{{ machine.name }}</h1>
 
     <Sensors v-if="machine.sensors.length" :sensors="machine.sensors" />
   </article>
